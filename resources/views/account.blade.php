@@ -36,20 +36,6 @@
                         name="address">{{Auth::user()->address}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Изменить</button>
-                @if(session('success'))
-                    <div class="alert alert-success my-3">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if($errors->any())
-                    <div class="alert alert-danger my-3">
-                        <ul class="mb-0">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
             </form>
         </div>
 
@@ -59,44 +45,40 @@
                     <h5 class="mb-0">Последние заказы</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>№ Заказа</th>
-
-                                    <th>Дата</th>
-                                    <th>Сумма</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#12345</td>
-
-                                    <td>10.07.2023</td>
-                                    <td>2 500 ₽</td>
-
-                                </tr>
-                                <tr>
-                                    <td>#12344</td>
-
-                                    <td>08.07.2023</td>
-                                    <td>1 800 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td>#12343</td>
-
-                                    <td>05.07.2023</td>
-                                    <td>3 200 ₽</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                    @if($orders->isEmpty())
+                        <p class="text-muted">У вас пока нет заказов</p>
+                    @else
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>№ Заказа</th>
+                                        <th>Дата</th>
+                                        <th>Сумма</th>
+                                  
+                                        <th>Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($orders as $order)
+                                        <tr>
+                                            <td>#{{ $order->id }}</td>
+                                            <td>{{ $order->created_at->format('d.m.Y') }}</td>
+                                            <td>{{ number_format($order->total_amount, 0, ',', ' ') }} ₽</td>
+                                          
+                                            <td>
+                                                <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-eye"></i> Подробнее
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

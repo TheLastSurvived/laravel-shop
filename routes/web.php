@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,21 +18,22 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [ProductController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/product', function () {
-    return view('product');
-})->name('product');
 
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('cart');
+    Route::post('/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::put('/update/{product}', [CartController::class, 'update'])->name('cart.update');
+});
+
+Route::resource('products', ProductController::class);
+
 
 Route::middleware('auth')->group(function () {
     // Для отображения формы (GET)
@@ -47,3 +50,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/registration', [RegisterController::class, 'showRegistrationForm'])->name('registration');
 Route::post('/registration', [RegisterController::class, 'register']);
+
+
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');

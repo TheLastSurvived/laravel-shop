@@ -53,13 +53,7 @@
             <input type="password" class="form-control" id="password-confirm" placeholder="Введите пароль"
                 aria-describedby="passwordHelp" name="password_confirmation" required autocomplete="new-password">
         </div>
-                @if($errors->any())
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
-    @endif
+
         <button type="submit" class="btn btn-primary">{{ __('Зарегистрироваться') }}</button>
     </form>
 @endsection

@@ -10,7 +10,8 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('account', ['user' => Auth::user()]);
+        $orders = auth()->user()->orders()->latest()->get();
+        return view('account', compact('orders'));
     }
 
     // Обновить данные
