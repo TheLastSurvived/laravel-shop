@@ -14,20 +14,20 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = Product::query();
-        
+
         // Фильтры (как в предыдущем примере)
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
-        
+
         if ($request->filled('price_from')) {
             $query->where('price', '>=', $request->price_from);
         }
-        
+
         if ($request->filled('price_to')) {
             $query->where('price', '<=', $request->price_to);
         }
-        
+
         // Сортировка
         $sort = $request->input('sort', 'newest');
         switch ($sort) {
@@ -40,9 +40,9 @@ class ProductController extends Controller
             default:
                 $query->latest();
         }
-        
+
         $products = $query->paginate(12)->appends($request->query());
-        
+
         return view('home', [
             'products' => $products,
             'categories' => Product::CATEGORIES,
@@ -63,6 +63,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'category' => 'required|string|max:255',
@@ -77,7 +78,7 @@ class ProductController extends Controller
 
         Product::create($validated);
 
-        return redirect()->back()->with('success', 'Товар успешно добавлен');
+        return redirect()->route('home')->with('success', 'Товар успешно добавлен');
     }
 
     /**

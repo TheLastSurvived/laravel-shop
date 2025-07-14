@@ -24,6 +24,8 @@ class CartController extends Controller
             }
         }
 
+       
+
         return view('cart', compact('products', 'total'));
     }
 
@@ -86,5 +88,17 @@ class CartController extends Controller
         }
 
         return $total;
+    }
+
+    public static function getCartCount(): int
+    {
+        $cart = session()->get('cart', []);
+        $count = 0;
+
+        foreach ($cart as $item) {
+            $count += is_array($item) ? $item['quantity'] : $item;
+        }
+
+        return $count;
     }
 }

@@ -15,6 +15,7 @@
       <h3 class="mb-0">Добавить новый велосипед</h3>
     </div>
     <div class="card-body">
+      
       <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 

@@ -18,6 +18,8 @@ use App\Http\Controllers\OrderController;
 |
 */
 
+Route::resource('products', ProductController::class);
+
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
@@ -32,7 +34,7 @@ Route::prefix('cart')->group(function () {
     Route::put('/update/{product}', [CartController::class, 'update'])->name('cart.update');
 });
 
-Route::resource('products', ProductController::class);
+
 
 
 Route::middleware('auth')->group(function () {

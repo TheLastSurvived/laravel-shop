@@ -31,7 +31,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     @auth
                         <a href="{{ route('profile.edit') }}" class="btn btn-primary">Профиль</a>
-                        <a href="{{ route('cart') }}" class="btn btn-warning mx-2">Корзина</a>
+                        <a href="{{ route('cart') }}" class="btn btn-warning mx-2">Корзина <span class="badge text-bg-dark">{{ \App\Services\CartService::getCount() }}</span></a>
                         <form action="{{ route('logout') }}" method="post" class="d-inline-flex">
                             @csrf
                             <button class="btn btn-danger" type="submit">Выйти</button>
