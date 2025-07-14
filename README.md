@@ -42,39 +42,39 @@
 ## Установка и запуск
 
 1. Клонировать репозиторий:
-  ```
-   git clone https://github.com/TheLastSurvived/laravel-shop.git
-   ```
+```
+git clone https://github.com/TheLastSurvived/laravel-shop.git
+```
 
 2. Установить зависимости:
-    ```
-   composer install
-   ```
+```
+composer install
+```
 
 3. Настроить окружение:
-    Создать файл .env на основе .env.example. Указать подключение к SQLite:
-    ```
-    DB_CONNECTION=sqlite
-    DB_DATABASE=/absolute/path/to/database.sqlite
-    ```
+Создать файл .env на основе .env.example. Указать подключение к SQLite:
+```
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database.sqlite
+```
 
 4. Создать файл базы данных:
 ```
-    touch database/database.sqlite
+touch database/database.sqlite
 ```
 5. Запустить миграции:
 ```
-6. php artisan migrate --seed
+ php artisan migrate --seed
 ```
-7.Запустить сервер:
+6.Запустить сервер:
 ```
 php artisan serve
 ```
 ### Технологии
 
-PHP 8.x
+PHP 8.1.9
 
-Laravel 10.x
+Laravel Framework 10.48.29
 
 SQLite
 
