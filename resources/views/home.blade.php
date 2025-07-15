@@ -93,9 +93,10 @@
                                 </div>
                                 
                                 <!-- Пагинация -->
-                                <div class="mt-4">
-                                    {{ $products->appends(request()->query())->links() }}
-                                </div>
+                          
+                                <div class="mt-4 d-flex justify-content-center">
+    {{ $products->appends(request()->except('page'))->links('pagination::bootstrap-5') }}
+</div>
                             @endif
                         </div>
                     </div>

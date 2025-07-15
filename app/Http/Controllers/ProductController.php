@@ -41,7 +41,7 @@ class ProductController extends Controller
                 $query->latest();
         }
 
-        $products = $query->paginate(12)->appends($request->query());
+        $products = $query->paginate(6)->appends($request->query());
 
         return view('products.index', [
             'products' => $products,

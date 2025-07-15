@@ -9,6 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .pagination {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +36,8 @@
                 <div class="d-flex align-items-center justify-content-between">
                     @auth
                         <a href="{{ route('profile.edit') }}" class="btn btn-primary">Профиль</a>
-                        <a href="{{ route('cart') }}" class="btn btn-warning mx-2">Корзина <span class="badge text-bg-dark">{{ \App\Services\CartService::getCount() }}</span></a>
+                        <a href="{{ route('cart') }}" class="btn btn-warning mx-2">Корзина <span
+                                class="badge text-bg-dark">{{ \App\Services\CartService::getCount() }}</span></a>
                         <form action="{{ route('logout') }}" method="post" class="d-inline-flex">
                             @csrf
                             <button class="btn btn-danger" type="submit">Выйти</button>
@@ -50,7 +56,7 @@
 
 
     <div class="container mt-4">
-         @if(session('success'))
+        @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="bi bi-check-circle-fill me-2"></i>
                 {{ session('success') }}
@@ -78,7 +84,7 @@
             </div>
         @endif
     </div>
-    
+
 
     <div class="container mt-4">
         @yield('content')
