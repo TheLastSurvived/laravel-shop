@@ -18,7 +18,7 @@ use App\Http\Controllers\OrderController;
 |
 */
 
-Route::resource('products', ProductController::class);
+
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
@@ -35,6 +35,7 @@ Route::prefix('cart')->group(function () {
 });
 
 
+Route::resource('products', ProductController::class);
 
 
 Route::middleware('auth')->group(function () {
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 Route::get('/registration', [RegisterController::class, 'showRegistrationForm'])->name('registration');
 Route::post('/registration', [RegisterController::class, 'register']);

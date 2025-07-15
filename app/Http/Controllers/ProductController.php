@@ -43,7 +43,7 @@ class ProductController extends Controller
 
         $products = $query->paginate(12)->appends($request->query());
 
-        return view('home', [
+        return view('products.index', [
             'products' => $products,
             'categories' => Product::CATEGORIES,
             'filters' => $request->all()
