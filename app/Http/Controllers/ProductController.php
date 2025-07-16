@@ -76,9 +76,10 @@ class ProductController extends Controller
             $validated['image'] = $request->file('image')->store('products', 'public');
         }
 
-        Product::create($validated);
+        $product = Product::create($validated);
 
-        return redirect()->route('home')->with('success', 'Товар успешно добавлен');
+        return redirect()->route('home')->with('success', 'Товар успешно обновлен!');
+
     }
 
     /**
@@ -135,7 +136,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('products.index')
+        return redirect()->route('home')
             ->with('success', 'Товар успешно удален');
     }
 }

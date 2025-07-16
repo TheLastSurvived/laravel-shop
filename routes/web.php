@@ -36,7 +36,7 @@ Route::prefix('cart')->group(function () {
 
 
 Route::resource('products', ProductController::class);
-
+Route::post('/add-products', [ProductController::class, 'store'])->name('products.store');
 
 Route::middleware('auth')->group(function () {
     // Для отображения формы (GET)

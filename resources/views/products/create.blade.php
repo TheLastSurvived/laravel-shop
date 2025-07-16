@@ -16,7 +16,7 @@
     </div>
     <div class="card-body">
       
-      <form action="{{ url('/products') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
      
         <!-- Основная информация -->
